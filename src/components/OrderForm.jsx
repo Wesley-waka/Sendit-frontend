@@ -33,8 +33,8 @@ export default function OrderForm() {
     parcel_name: "",
     weight: null,
     price: "",
-    pickup_location: "",
-    destination: "",
+    pickup_location: "dummy location",
+    destination: "dummy location",
     user_id: 0,
     country: "",
   });
@@ -129,16 +129,18 @@ export default function OrderForm() {
   const pickupAutoCompleteRef = useRef(null);
   const destinationAutoCompleteRef = useRef(null);
 
-  const handlePlaceChanged = (fieldName) => {
-    const autoCompleteRef =
-      fieldName === "pickup_location"
-        ? pickupAutoCompleteRef
-        : destinationAutoCompleteRef;
-    const place = autoCompleteRef.current.getPlace();
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [fieldName]: place.formatted_address,
-    }));
+  const handlePlaceChanged = (e) => {
+    handleInputChange(e)
+    return
+    // const autoCompleteRef =
+    //   fieldName === "pickup_location"
+    //     ? pickupAutoCompleteRef
+    //     : destinationAutoCompleteRef;
+    // const place = autoCompleteRef.current.getPlace();
+    // setFormData((prevFormData) => ({
+    //   ...prevFormData,
+    //   [fieldName]: place.formatted_address,
+    // }));
   };
 
   if (!isLoaded) {
@@ -286,14 +288,13 @@ export default function OrderForm() {
                         onLoad={(autoComplete) =>
                           (pickupAutoCompleteRef.current = autoComplete)
                         }
-                        onPlaceChanged={() =>
-                          handlePlaceChanged("pickup_location")
-                        }
+                        onPlaceChanged={handlePlaceChanged}
                       >
                         <input
                           type="text"
                           name="pickup_location"
                           id="pickup_location"
+                          onChange={handlePlaceChanged}
                           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                           required
                         />
@@ -317,12 +318,13 @@ export default function OrderForm() {
                         onLoad={(autoComplete) =>
                           (destinationAutoCompleteRef.current = autoComplete)
                         }
-                        onPlaceChanged={() => handlePlaceChanged("destination")}
+                        onPlaceChanged={handlePlaceChanged}
                       >
                         <input
                           type="text"
                           name="destination"
                           id="destination"
+                          onChange={handlePlaceChanged}
                           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                           required
                         />
@@ -398,7 +400,7 @@ export default function OrderForm() {
         </div>
       </div>
 
-      {isLoaded && (
+      {/* {isLoaded && (
         <div className="flow-root m-12 h-96 border rounded-lg">
           <GoogleMap
             mapContainerStyle={{ width: "100%", height: "100%" }}
@@ -411,7 +413,7 @@ export default function OrderForm() {
             )}
           </GoogleMap>
         </div>
-      )}
+      )} */}
 
       <div className="hidden sm:block" aria-hidden="true">
         <div className="py-5">
