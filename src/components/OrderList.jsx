@@ -158,23 +158,27 @@ export default function OrderList() {
         
       </div>
 
-      <div>
-        <div>
-          <p>Total Price</p>
-          {
-            filteredParcels?.reduce((total, val) => {
-              return val.price + total
-            }, 0)
-          }
-        </div>
+      <div style={{margin: "auto", width: "100vw", display: "flex", justifyContent:  "center", marginTop: "3rem"}}>
+        <div style={{display: "flex", gap: "6rem"}}>
 
-        <button
-          type="submit"
-          onClick={handleCheckout}
-          className="inline-flex justify-center rounded-md border border-transparent bg-slate-900 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-        >
-          Checkout
-      </button>
+          <div style={{display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem"}}>
+            <p style={{textAlign: "center"}}>Total Price</p>
+            {
+              filteredParcels?.reduce((total, val) => {
+                return val.price + total
+              }, 0)
+            }
+          </div>
+
+          <button
+            type="submit"
+            style={{height: "max-content"}}
+            onClick={handleCheckout}
+            className="inline-flex justify-center rounded-md border border-transparent bg-slate-900 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          >
+            Checkout
+        </button>
+        </div>
       </div>
     </div>
   );
