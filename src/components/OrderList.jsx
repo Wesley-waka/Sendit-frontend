@@ -73,7 +73,9 @@ export default function OrderList() {
       body: JSON.stringify(
         {
           email: "adewale@budpay.com",
-          amount: "10",
+          amount: filteredParcels?.reduce((total, val) => {
+            return val.price + total
+          }, 0),
           currency: "KES",
           reference: `123456890123mn4mm5ckpskt0dsjlwk${Math.random().toString(36).substring(2,7)}`,
           callback: "www.budpay.com"
