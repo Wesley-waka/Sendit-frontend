@@ -122,6 +122,17 @@ export default function OrderList() {
         
         
       </div>
+
+      <div>
+        <div>
+          <p>Total Price</p>
+          {
+            filteredParcels?.reduce((total, val) => {
+              return val.price + total
+            }, 0)
+          }
+        </div>
+      </div>
     </div>
   );
 }
